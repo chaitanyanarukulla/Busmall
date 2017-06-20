@@ -33,13 +33,13 @@ new imgMaker('water', 'img/water-can.jpg');
 new imgMaker('wine', 'img/wine-glass.jpg');
 
 function randomRoll() {
-  Math.floor((Math.random() * nameArray.length) + 1);
-  console.log(randomRoll);
+  Math.floor((Math.random() * nameArray.length) );
+
 }
 
-// var newImages = function() {
-//   while(newImages.length < 3){
-//     for (var i = 0;i < newImages.length; i++) {
-//     }
-//   }
-// };
+var newImages = function() {
+  while(newImages.length < 3){
+    for (var i = 0;i < newImages.length; i++) {
+    }
+  }
+};
