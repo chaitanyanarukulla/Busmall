@@ -28,3 +28,7 @@ height: 100px;
 #imgrool img {
   padding: 10px;
 }
+#chart{
+  max-width: 900px;
+  margin-left: 250px;
+}
