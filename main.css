@@ -2,20 +2,29 @@
 
 body{
 background-color:#4567;
-margin: 0;
-padding: 0;
 text-align: center;
  }
 header{
   background-color: gray;
   width: 100%;
+  height: 80px;
   margin-bottom: 25px;
 }
-#imgCointainer{background-color:#567856;
+h1 {
+  font-size: 50px;
+  padding: 10px;
 }
-img{
-  padding:5px;
-  display:inline-block;
-  margin-left: auto;
-  margin-right: auto;
+.wrapper{
+  margin: 20px;
+height: 100px;
+}
+#imgrool{
+  background-color: red;
+  height: 320px;
+}
+#imgrool ul li {
+  text-decoration: none;
+}
+#imgrool img {
+  padding: 10px;
 }
