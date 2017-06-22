@@ -5,7 +5,7 @@ var piconweb = document.getElementById('imgrool');
 var totalClicks = 0;
 
 // product constructer
-function imgMaker(name, path) {
+function ImgMaker(name, path) {
   this.path = path;
   this.name = name;
   this.views = 0;
@@ -20,8 +20,9 @@ function randomPic() {
     if (!newrender.includes(allArray[randomNum]) && !oldrender.includes(allArray[randomNum])) {
       newrender.push(allArray[randomNum]);
     }
+    oldrender = newrender;
   }
-  oldrender = newrender;
+
 }
 //calculate conversion rate
 function calcConversion() {
@@ -33,13 +34,13 @@ function calcConversion() {
     }
   }
 }
-
+// Wipe the window imgs
 function wipe() {
   while (imgrool.firstChild) {
     imgrool.removeChild(imgrool.firstChild);
   }
 }
-
+// putting img on screen
 function render() {
   randomPic();
   for (var i = 0; i < newrender.length; i++) {
@@ -50,12 +51,13 @@ function render() {
     newrender[i].views++;
   }
 }
-
+// Event handler
 function handleClick(event) {
   for (var i = 0; i < newrender.length; i++) {
     if (event.target.id === newrender[i].name) {
       newrender[i].clicks++;
       totalClicks++;
+      localStorage.setItem('chai',JSON.stringify(allArray));
     }
   }
   if (totalClicks === 25) {
@@ -68,15 +70,14 @@ function handleClick(event) {
     render();
   }
 }
-
+//making chart
 function coolChart() {
   var chartLabel = [];
   var chartData = [];
-  for (var i = 0; i < allArray.length; i++){
+  for (var i = 0; i < allArray.length; i++) {
     chartData.push(allArray[i].clicks);
     chartLabel.push(allArray[i].name);
   }
-
 
   var ctx = document.getElementById("myChart").getContext('2d');
   var myChart = new Chart(ctx, {
@@ -88,25 +89,25 @@ function coolChart() {
         data: chartData,
         backgroundColor: [
           'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 88, 0.3)',
+          'rgba(54, 162, 235, .9)',
+          'rgba(255, 206, 88, .8)',
           'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.3)',
+          'rgba(153, 102, 255, .9)',
+          'rgba(255, 159, 64, .8)',
           'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 88, 0.3)',
+          'rgba(54, 162, 235, .7)',
+          'rgba(255, 206, 88.8)',
           'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.3)',
+          'rgba(153, 102, 255,.9)',
+          'rgba(255, 159, 64,.8)',
           'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 88, 0.3)',
+          'rgba(54, 162, 235, .8)',
+          'rgba(255, 206, 88, .9)',
           'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.3)',
+          'rgba(153, 102, 255, .9)',
+          'rgba(255, 159, 64, .8)',
           'rgba(255, 99, 132,1)',
-          'rgba(54, 162, 235, 0.2)',
+          'rgba(54, 162, 235.9)',
         ],
         borderColor: [
           'rgba(255,99,132,1)',
@@ -131,7 +132,7 @@ function coolChart() {
           'rgba(54, 162, 235, 1)',
           'rgba(255, 206, 86, 1)',
         ],
-        borderWidth: 2
+        borderWidth: 1
       }]
     },
     options: {
@@ -146,28 +147,31 @@ function coolChart() {
   });
 }
 
-new imgMaker('bag', 'img/bag.jpg');
-new imgMaker('banana', 'img/banana.jpg');
-new imgMaker('bathroom', 'img/bathroom.jpg');
-new imgMaker('boots', 'img/boots.jpg');
-new imgMaker('breakfast', 'img/breakfast.jpg');
-new imgMaker('bubblegum', 'img/bubblegum.jpg');
-new imgMaker('chair', 'img/chair.jpg');
-new imgMaker('cthulhu', 'img/cthulhu.jpg');
-new imgMaker('dog-duck', 'img/dog-duck.jpg');
-new imgMaker('dragon', 'img/dragon.jpg');
-new imgMaker('pen', 'img/pen.jpg');
-new imgMaker('pet-sweep', 'img/pet-sweep.jpg');
-new imgMaker('scissors', 'img/scissors.jpg');
-new imgMaker('shark', 'img/shark.jpg');
-new imgMaker('sweep', 'img/sweep.jpg');
-new imgMaker('tauntaun', 'img/tauntaun.jpg');
-new imgMaker('unicorn', 'img/unicorn.jpg');
-new imgMaker('usb', 'img/usb.jpg');
-new imgMaker('water-can', 'img/water-can.jpg');
-new imgMaker('wine-glass', 'img/wine-glass.jpg');
+
+if (localStorage.chai) {
+  allArray = JSON.parse(localStorage.chai);
+} else {
+  new ImgMaker('bag', 'img/bag.jpg');
+  new ImgMaker('banana', 'img/banana.jpg');
+  new ImgMaker('bathroom', 'img/bathroom.jpg');
+  new ImgMaker('boots', 'img/boots.jpg');
+  new ImgMaker('breakfast', 'img/breakfast.jpg');
+  new ImgMaker('bubblegum', 'img/bubblegum.jpg');
+  new ImgMaker('chair', 'img/chair.jpg');
+  new ImgMaker('cthulhu', 'img/cthulhu.jpg');
+  new ImgMaker('dog-duck', 'img/dog-duck.jpg');
+  new ImgMaker('dragon', 'img/dragon.jpg');
+  new ImgMaker('pen', 'img/pen.jpg');
+  new ImgMaker('pet-sweep', 'img/pet-sweep.jpg');
+  new ImgMaker('scissors', 'img/scissors.jpg');
+  new ImgMaker('shark', 'img/shark.jpg');
+  new ImgMaker('sweep', 'img/sweep.jpg');
+  new ImgMaker('tauntaun', 'img/tauntaun.jpg');
+  new ImgMaker('unicorn', 'img/unicorn.jpg');
+  new ImgMaker('usb', 'img/usb.jpg');
+  new ImgMaker('water-can', 'img/water-can.jpg');
+  new ImgMaker('wine-glass', 'img/wine-glass.jpg');
+}
 randomPic();
 render();
 imgrool.addEventListener('click', handleClick);
-
-/// .js

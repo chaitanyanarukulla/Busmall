@@ -1,25 +1,30 @@
 
 
 body{
-background-color:#4567;
+background-image: url(img/bus.jpg);
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
 text-align: center;
  }
 header{
-  background-color: gray;
+  background-color: 	rgba(0, 191, 255,.4);
   width: 100%;
   height: 80px;
   margin-bottom: 25px;
 }
 h1 {
-  font-size: 50px;
+  font-size: 60px;
   padding: 10px;
 }
 .wrapper{
-  margin: 20px;
+  margin: 10px;
 height: 100px;
+font-size: 25px;
+color: rgb(24, 10, 155);
 }
 #imgrool{
-  background-color: red;
+background-color: rgba(64, 0, 255,0.5);
   height: 320px;
 }
 #imgrool ul li {
