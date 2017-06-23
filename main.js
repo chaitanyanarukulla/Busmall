@@ -10,6 +10,8 @@ function ImgMaker(name, path) {
   this.name = name;
   this.views = 0;
   this.clicks = 0;
+  this.percent = 0;
+  // this.calcConversion = 0;
   allArray.push(this);
 };
 //function for random picture..
@@ -28,9 +30,9 @@ function randomPic() {
 function calcConversion() {
   for (var i = 0; i < allArray.length; i++) {
     if (allArray[i].views === 0) {
-      allArray[i].conversion = 'NA';
+      allArray[i].views = 0;
     } else {
-      allArray[i].conversion = allArray[i].clicks / allArray[i].views;
+      allArray[i].percent = allArray[i].clicks / allArray[i].views;
     }
   }
 }
@@ -57,20 +59,22 @@ function handleClick(event) {
     if (event.target.id === newrender[i].name) {
       newrender[i].clicks++;
       totalClicks++;
-      localStorage.setItem('chai',JSON.stringify(allArray));
+      localStorage.setItem('chai', JSON.stringify(allArray));
     }
   }
   if (totalClicks === 25) {
     piconweb.removeEventListener('click', handleClick);
     wipe();
+    calcConversion();
     coolChart();
+    // coolChart2();
   } else {
     wipe();
     randomPic();
     render();
   }
 }
-//making chart
+// making chart
 function coolChart() {
   var chartLabel = [];
   var chartData = [];
@@ -78,7 +82,6 @@ function coolChart() {
     chartData.push(allArray[i].clicks);
     chartLabel.push(allArray[i].name);
   }
-
   var ctx = document.getElementById("myChart").getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',
@@ -146,6 +149,82 @@ function coolChart() {
     }
   });
 }
+
+// function coolChart2() {
+//   var chartLabel = [];
+//   var chartData = [];
+//   for (var i = 0; i < allArray.length; i++) {
+//     chartLabel.push(allArray[i].name);
+//     chartCon.push(allArray[i].percent);
+//   }
+//
+//   var ctx = document.getElementById("myChart2").getContext('2d');
+//   var myChart = new Chart(ctx, {
+//     type: 'bar',
+//     data: {
+//       labels: chartLabel,
+//       datasets: [{
+//         label: 'Buss Mall - Products Clicked ',
+//         data: chartCon,
+//         backgroundColor: [
+//           'rgba(255, 99, 132, 1)',
+//           'rgba(54, 162, 235, .9)',
+//           'rgba(255, 206, 88, .8)',
+//           'rgba(75, 192, 192, 1)',
+//           'rgba(153, 102, 255, .9)',
+//           'rgba(255, 159, 64, .8)',
+//           'rgba(255, 99, 132, 1)',
+//           'rgba(54, 162, 235, .7)',
+//           'rgba(255, 206, 88.8)',
+//           'rgba(75, 192, 192, 1)',
+//           'rgba(153, 102, 255,.9)',
+//           'rgba(255, 159, 64,.8)',
+//           'rgba(255, 99, 132, 1)',
+//           'rgba(54, 162, 235, .8)',
+//           'rgba(255, 206, 88, .9)',
+//           'rgba(75, 192, 192, 1)',
+//           'rgba(153, 102, 255, .9)',
+//           'rgba(255, 159, 64, .8)',
+//           'rgba(255, 99, 132,1)',
+//           'rgba(54, 162, 235.9)',
+//         ],
+//         borderColor: [
+//           'rgba(255,99,132,1)',
+//           'rgba(54, 162, 235, 1)',
+//           'rgba(255, 206, 86, 1)',
+//           'rgba(75, 192, 192, 1)',
+//           'rgba(153, 102, 255, 1)',
+//           'rgba(255, 159, 64, 1)',
+//           'rgba(255,99,132,1)',
+//           'rgba(54, 162, 235, 1)',
+//           'rgba(255, 206, 86, 1)',
+//           'rgba(75, 192, 192, 1)',
+//           'rgba(153, 102, 255, 1)',
+//           'rgba(255, 159, 64, 1)',
+//           'rgba(255,99,132,1)',
+//           'rgba(54, 162, 235, 1)',
+//           'rgba(255, 206, 86, 1)',
+//           'rgba(75, 192, 192, 1)',
+//           'rgba(153, 102, 255, 1)',
+//           'rgba(255, 159, 64, 1)',
+//           'rgba(255,99,132,1)',
+//           'rgba(54, 162, 235, 1)',
+//           'rgba(255, 206, 86, 1)',
+//         ],
+//         borderWidth: 1
+//       }]
+//     },
+//     options: {
+//       scales: {
+//         yAxes: [{
+//           ticks: {
+//             beginAtZero: true
+//           }
+//         }]
+//       }
+//     }
+//   });
+// }
 
 
 if (localStorage.chai) {
